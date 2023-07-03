@@ -1,5 +1,5 @@
 {%extends 'algapp/base.html'%}
-
+{% load static %}
 {%block content%}
 
 
@@ -56,7 +56,7 @@
                                                 It could be changed or replaced. You should ask a waiter about your options.
                                             </b>
                                         </div>
-                                        <p><img src="/static/algapp/images/warning_yellow.png" width="20px"></p>
+                                        <p><img src="{% static 'algapp/images/warning_yellow.png' %}" width="20px"></p>
                                     </div>
                                 {% endif %}
                             {% endfor %}

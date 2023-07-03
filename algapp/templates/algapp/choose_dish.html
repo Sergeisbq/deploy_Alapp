@@ -1,6 +1,6 @@
 
 {%extends 'algapp/base.html'%}
-
+{% load static %}
 {%block content%}
 
 <style>
@@ -75,7 +75,7 @@
                     It couldn't be changed or replaced. We recommend you avoid this dish.
                     </b>
                 </div>
-                <p><img src="/static/algapp/images/warning_red.png" width="20px"></p>
+                <p><img src="{% static 'algapp/images/warning_red.png' %}" width="20px"></p>
                 {% endif %}
                 {% if allergic_v and not allergic_m %}
                 <div class="popup yellow-popup">
@@ -90,7 +90,7 @@
                     It could be changed or replaced. You should ask a waitor about tour options.
                     </b>
                 </div>
-                <p><img src="/static/algapp/images/warning_yellow.png" width="20px"></p>
+                <p><img src="{% static 'algapp/images/warning_yellow.png' %}" width="20px"></p>
                 {% endif %}
               </div>
             </div>

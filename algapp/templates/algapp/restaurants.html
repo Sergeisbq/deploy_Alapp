@@ -1,4 +1,5 @@
 {%extends 'algapp/base.html'%}
+{% load static %}
 
 {%block content%}
 
@@ -21,7 +22,7 @@
                 </tr>
             </table>
         </div>
-        <img class="imghp" src="/static/algapp/images/2.jpg">
+        <img class="imghp" src="{% static 'algapp/images/2.jpg' %}">
     </div>
 <div>
     {% if not request.user.customer %}
