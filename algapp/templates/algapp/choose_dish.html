@@ -1,0 +1,135 @@
+
+{%extends 'algapp/base.html'%}
+
+{%block content%}
+
+<style>
+    .allergen-warning {
+        color: red;
+    }
+    
+    .modifiable-allergen-warning {
+        color: orange;
+    }
+</style>
+
+<div class="menu">
+    <h2>Adapted menu</h2>
+</div>
+<div class="rest_p">
+    <div class="form-container"><br>
+        <form method="post" action="{% url 'one_rest_no_red' r.id%}">
+            {% csrf_token %}
+            
+            <button type="submit" name="process_button">Hide dishes better to avoid</button>
+        </form>
+    </div>
+</div>
+
+
+<div class="bg-image">
+    <div class="menu-container">
+      <div id="boxes"> 
+        {% csrf_token %}
+        {% for dish, allergic_m, allergic_v, ingredients_main, ingredients_var in dishes_allergens %}
+          <div class="content1">
+            <div class="dish-info">
+              <div class="dish-name">
+                <p><b>{{ dish.name }}</b>: </p>
+              </div>
+              <div class="dish-name">
+                <p>{% for i in ingredients_main %}
+                  {% if i in allergic_m %}
+                    <span class="allergen-warning">{{ i }}</span>,
+                  {% else %}
+                    <span>{{ i }}</span>,
+                  {% endif %}
+                {% endfor %}
+                {% for i in ingredients_var %}
+                  {% if forloop.last %}
+                    {% if i in allergic_v %}
+                      <span class="modifiable-allergen-warning">{{ i }}.</span>
+                    {% else %}
+                      <span>{{ i }}.</span>
+                    {% endif %}
+                  {% else %}
+                    {% if i in allergic_v %}
+                      <span class="modifiable-allergen-warning">{{ i }},</span>
+                    {% else %}
+                      <span>{{ i }},</span>
+                    {% endif %}
+                  {% endif %}
+                {% endfor %}</p>
+              </div>
+              <div class="object" onmouseover="showPopup()" onmouseout="hidePopup()">
+                {% if allergic_m %}
+                <div class="popup red-popup">
+                    <b>Found allergens in base ingredients: 
+                    {% for allergen in allergic_m %} 
+                        {% if forloop.last %}
+                            {{ allergen }}.
+                        {% else %}
+                            {{ allergen }},
+                        {% endif %}
+                    {% endfor %} 
+                    It couldn't be changed or replaced. We recommend you avoid this dish.
+                    </b>
+                </div>
+                <p><img src="/static/algapp/images/warning_red.png" width="20px"></p>
+                {% endif %}
+                {% if allergic_v and not allergic_m %}
+                <div class="popup yellow-popup">
+                    <b>Found allergens in modifiable ingredients: 
+                        {% for allergen in allergic_v %} 
+                        {% if forloop.last %}
+                            {{ allergen }}.
+                        {% else %}
+                            {{ allergen }},
+                        {% endif %}
+                    {% endfor %} 
+                    It could be changed or replaced. You should ask a waitor about tour options.
+                    </b>
+                </div>
+                <p><img src="/static/algapp/images/warning_yellow.png" width="20px"></p>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+  
+
+
+
+
+
+    
+    
+{%endblock content%}
+
+{% block js_files %} 
+
+    <script>
+    
+    function showPopup(event) {
+    const target = event.target;
+    const popup = target.parentNode.querySelector('.popup');
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+function hidePopup(event) {
+    const target = event.target;
+    const popup = target.parentNode.querySelector('.popup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+    </script>
+
+{% endblock %}

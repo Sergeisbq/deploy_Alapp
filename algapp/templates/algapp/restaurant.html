@@ -1,0 +1,51 @@
+{%extends 'algapp/base.html'%}
+
+{%block content%}
+
+<div class="rest_p">
+    <div class="rp_h1"><h1>Restaurant {{r.name}} </h1>
+
+        {%csrf_token%}
+        {{r.address}} 
+    </div>
+    <div class="form-container"><br>
+        <form method="post" action="{% url 'dish_path' r.id%}">
+            {% csrf_token %}
+            
+            <button type="submit" name="process_button">Highlight your allergens</button>
+        </form>
+    </div>
+</div>
+
+<div class="bg-image">
+    <div class="menu-container">
+        <div id="boxes">
+            {% for dish in dishes %}
+            <div class="content1">
+                <p class="dish-name"><b>{{ dish.name }}</b>
+                - {% for i in dish.dish_main_ingredients.all %}
+                    {{ i }},
+                {% endfor %}
+                {% for i in dish.dish_var_ingredients.all %}
+                    {% if forloop.last %}
+                    {{ i }}.
+                    {% else %}
+                    {{ i }},
+                    {% endif %}
+                {% endfor %}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div>
+
+    </div>
+</div>
+    
+
+
+{%endblock content%}
+
+
+
+

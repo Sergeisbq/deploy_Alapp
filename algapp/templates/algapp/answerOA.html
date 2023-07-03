@@ -1,0 +1,38 @@
+{% extends 'algapp/base.html' %}
+
+
+ 
+{% block content %}
+
+<h2>{{response.name}}</h2><br>
+<div id="container_re">
+    <div id="container_re_inside">
+        <h3>Ingridients</h3>
+        {% for item in response.ingredients%}
+
+        <ul>
+            <li>{{item}}</li>
+        </ul>
+
+        {% endfor %}
+    </div>
+    <br>
+    <div id="container_re_inside">
+        <h3>Instructions</h3>
+        {% for item in response.instructions%}
+
+        <ul>
+            <li>{{item}}</li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js_files %} 
+<script src="/static/algapp/js/script.js"></script>
+{% endblock %}
+
+
+

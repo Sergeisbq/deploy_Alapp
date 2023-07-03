@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<h1> Profile: <small>  </small> </h1>
+<p>Username: {{user.username}}</p>
+<p>Firstname: {{customer.first_name}}</p>
+<p>Lastname: {{customer.last_name}}</p>
+<p>Email: {{customer.email}}</p>
+<h2>Allergens:</h2>
+<ul>
+{% for allergen in customer.allergens.all %}
+    <li>{{ allergen.name }}</li>
+{% empty %}
+    <li>No allergens found.</li>
+{% endfor %}
+</ul>
+<a href="{% url 'update_customer' %}">Update Profile</a>
+
+{%endblock content%}
+

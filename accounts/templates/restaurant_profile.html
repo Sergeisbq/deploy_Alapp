@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+
+<div class="restaurant-profile">
+
+    
+    
+    <div class="menu">
+      <h2>Restaurant Profile</h2>
+      <div class="restaurant-info">
+        <p>Username: {{rest_user.username}}</p>
+        <p>Name: {{rest_customer.name}}</p>
+        <p>Address: {{rest_customer.address}}</p>
+        <a href="{% url 'update_restaurant' %}">Update Restaurant's information</a><br>
+        <a href="{% url 'add_dish' %}">Add dish</a>
+      </div>
+      <h3>Menu</h3>
+      <hr>
+      <hr>
+      <br>
+        {% for dish in dishes %}
+          <div class="wrapper_3">
+            <h5 class="dish-name-box"><a href="{% url 'update_dish' dish.id %}">{{ dish.name }}</a></h5>
+            
+              
+              <p class="dish-ing-box">
+
+                {% for ingredient in dish.dish_main_ingredients.all %}
+                
+                  {{ ingredient.name }},
+                {% endfor %}
+                {% for ingredient in dish.dish_var_ingredients.all %}
+                {% if forloop.last %}
+                  {{ ingredient.name }}.
+                {% else %}
+                  {{ ingredient.name }},
+                {% endif %}
+                {% endfor %}
+              </p>
+            
+            <form class="dish-btn-box" action="{% url 'delete_dish' dish.id %}" method="post">
+              {% csrf_token %}
+              <button  type="submit">Delete</button>
+            </form>
+
+          </div>
+          <hr>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+
+{%endblock content%}
+

@@ -1,0 +1,43 @@
+{%extends 'algapp/base.html'%}
+
+{%block content%}
+
+<style>
+    .under_the_btn {
+        
+        text-align: center;
+    }
+</style>
+<br>
+<div class="choose_acc">
+    <div class="form-container2"><br>
+        <form method="get" action="{% url 'add_customer' %}">
+            {% csrf_token %}
+            
+            <button type="submit" name="process_button">Personal account</button><br>
+            <p class="under_the_btn">If you want to connect to the AllerGuard as a person<br> and use the service to make your life easier</p>
+        </form>
+    </div><br><br><br>
+    <div class="form-container2">
+
+            <form method="get" action="{% url 'add_restaurant' %}">
+            {% csrf_token %}
+            
+            <button type="submit" name="process_button">Business account</button><br>
+            <p class="under_the_btn">If you want to become a part of AllerGuard as a restaurant<br> to provide your clients the best service</p>
+            </form>
+
+
+            
+
+    </div>
+    
+</div>
+
+
+
+{%endblock content%}
+
+
+
+

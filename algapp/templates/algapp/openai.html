@@ -1,0 +1,20 @@
+{% extends 'algapp/base.html' %}
+{% block content %}
+<form method="POST" action="{% url 'openai-ask' %}">
+    <label for="title">Ask us for recipe and we'll recommend you the best one without your allergens:</label>
+    <select name="select_th">
+        <option name="prompt_th1">Recipe</option>
+        <option name="prompt_th2">Suggestion</option>
+        <option name="prompt_th3">Free request</option>
+    </select>
+    <input type="text" name="prompt" required value="">
+    <!-- <select name="select_lg">
+        <option name="prompt_th1">English</option>
+        <option name="prompt_th2">Hebrew</option>
+        <option name="prompt_th3">Russian</option>
+    </select> -->
+    <button type="submit">Ask</button>
+</form>
+
+
+{% endblock %}

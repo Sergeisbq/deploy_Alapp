@@ -1,0 +1,11 @@
+{%extends 'algapp/base.html'%}
+
+{%block content%}
+<div class="rectangle3add"></div><h1 class="h1cadd">Here you could change the name and the ingredients of the dish</h1>
+    <form class="form_add_c" method="post"> 
+        {%csrf_token%}
+            {{form}}
+        <button type="submit"> Update Dish </button>
+    </form>
+
+{%endblock content%}

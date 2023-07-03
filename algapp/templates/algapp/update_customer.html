@@ -1,0 +1,39 @@
+{%extends 'algapp/base.html'%}
+
+
+
+{%block content%}
+<div class="rectangle3add"></div><h1 class="h1cadd">Please, type your full name, e-mail and choose the allergens from list below<br>to get the ability of using our service </h1>
+    <form class="form_add_c" method="post"> 
+        {%csrf_token%}
+            {{form}}
+
+        <button type="submit"> Update Profile </button>
+    </form>
+
+{%endblock content%}
+
+{% block js_files %} 
+
+    <script>
+    
+    document.getElementById('id_search_query').addEventListener('input', function() {
+    
+        let searchQuery = this.value.toLowerCase();
+        let allergenCheckboxes = document.querySelectorAll('input[name="allergens"]');
+    
+        allergenCheckboxes.forEach(function(checkbox) {
+            let allergenName = checkbox.parentElement.textContent.toLowerCase();
+            if (allergenName.includes(searchQuery)) {
+                checkbox.parentElement.style.display = 'block'; 
+            } else {
+                checkbox.parentElement.style.display = 'none';   
+            }
+        });
+    });
+    </script>
+{% block extra_widgets %}
+{% include 'django/forms/widgets/checkbox_select_multiple.html' %}
+{% endblock extra_widgets %}
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{%extends 'algapp/base.html'%}
+
+{% block content %}
+
+
+    <div class="form-container">
+        <form method="post" action="{% url 'dish_path' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Show the menu</button>
+        </form>
+    </div>
+{% endblock content %}
+

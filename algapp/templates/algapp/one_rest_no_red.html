@@ -1,0 +1,103 @@
+{%extends 'algapp/base.html'%}
+
+{%block content%}
+
+
+
+<div class="menu">
+    <h2>Adapted menu</h2>
+</div>
+
+<div class="bg-image">
+    <div class="menu-container">
+        <div id="boxes"> 
+            {% csrf_token %}
+            {% for dish, allergic_v, ingredients_main, ingredients_var in dishes_allergens %}
+
+                    <div class="content1">
+                        <div class="dish-info">
+                            <div class="dish-name">
+                                <p><b>{{ dish.name }}</b>: </p>
+                            </div>
+                            <div class="dish-name">
+                                <p>
+                                    {% for i in ingredients_main %}
+                                        <span>{{ i }}</span>,
+                                    {% endfor %}
+                                    {% for i in ingredients_var %}
+                                        {% if forloop.last %}
+                                            {% if i in allergic_v %}
+                                                <span class="modifiable-allergen-warning">{{ i }}</span>.
+                                            {% else %}
+                                                <span>{{ i }}</span>.
+                                            {% endif %}
+                                        {% else %}
+                                            {% if i in allergic_v %}
+                                                <span class="modifiable-allergen-warning">{{ i }}</span>,
+                                            {% else %}
+                                                <span>{{ i }}</span>,
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </p>
+                            </div>
+                            {% for i in ingredients_var %}
+                                {% if i in allergic_v %}
+                                    <div class="object" onmouseover="showPopup()" onmouseout="hidePopup()">
+                                        <div class="popup yellow-popup">
+                                            <b>Found allergens in modifiable ingredients: 
+                                                {% for allergen in allergic_v %} 
+                                                    {% if forloop.last %}
+                                                        {{ allergen }}.
+                                                    {% else %}
+                                                        {{ allergen }},
+                                                    {% endif %}
+                                                {% endfor %} 
+                                                It could be changed or replaced. You should ask a waiter about your options.
+                                            </b>
+                                        </div>
+                                        <p><img src="/static/algapp/images/warning_yellow.png" width="20px"></p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% empty %}
+                <div class="content1">
+                    <p><b>Unfortunately, there are no such dishes</b></p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+  
+
+
+
+
+{%endblock content%}
+
+{% block js_files %} 
+
+    <script>
+    
+    function showPopup(event) {
+    const target = event.target;
+    const popup = target.parentNode.querySelector('.popup');
+    if (popup) {
+        popup.style.display = 'block';
+    }
+}
+
+    function hidePopup(event) {
+    const target = event.target;
+    const popup = target.parentNode.querySelector('.popup');
+    if (popup) {
+        popup.style.display = 'none';
+    }
+}
+
+    </script>
+
+{% endblock %}

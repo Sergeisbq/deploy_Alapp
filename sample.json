@@ -1,0 +1,19 @@
+{
+    "id": "cmpl-7VGLJO8yFaYf2CGpz38RBMWRVGfGo",
+    "object": "text_completion",
+    "created": 1687685345,
+    "model": "text-davinci-003",
+    "choices": [
+        {
+            "text": "\n\n{\n  \"name\": \"Fish & Chips\",\n  \"ingredients\": [\n    \"Potatoes\",\n    \"Vegetable Oil\",\n    \"Salt\",\n    \"Flour\",\n    \"Eggs\",\n    \"Breadcrumbs\"\n  ],\n  \"instructions\": [\n    \"Peel and cut the potatoes into chips. Place them in a bowl of cold water and set aside.\",\n    \"Heat the oil in a deep-fryer or large saucepan to 350\u00b0F.\",\n    \"Drain the potatoes and pat dry with paper towels. Fry the chips in batches for 3 to 5 minutes, or until golden brown.\",\n    \"Remove the chips from the oil and drain on paper towels. Sprinkle with salt.\",\n    \"In a shallow bowl, mix together the flour, eggs, and breadcrumbs.\",\n    \"Dip the fish fillets in the flour mixture, coating both sides. Shake off any excess.\",\n    \"Fry the fish in the hot oil for 3 to 5 minutes, or until golden brown and cooked through.\",\n    \"Drain the fish on paper towels. Serve with the chips.\"\n  ]\n}",
+            "index": 0,
+            "logprobs": null,
+            "finish_reason": "stop"
+        }
+    ],
+    "usage": {
+        "prompt_tokens": 25,
+        "completion_tokens": 256,
+        "total_tokens": 281
+    }
+}

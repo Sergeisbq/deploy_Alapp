@@ -1,0 +1,26 @@
+{%extends 'algapp/base.html'%}
+
+{%block content%}
+<div class="rectangle3add"></div><h1 class="h1cadd">Please, type the name of the dish and choose ingredients 
+    from lists below<br>if we don't have needed ingredient you could add it by yourself</h1>
+    {% for dish in dishes %}
+        <p><b>{{dish.name}}</b>
+        {% for ingredient in dish.dish_main_ingredients.all %}
+        {{ ingredient.name }},
+        {% endfor %}
+        {% for ingredient in dish.dish_var_ingredients.all %}
+        {{ ingredient.name }},
+        {% endfor %}</p>
+    {% endfor %}
+    <form class="form_add_c" method="post"> 
+        {%csrf_token%}
+            {{form}}
+        <button type="submit"> Add Dish </button>
+    </form>
+    <form method="post" action="{% url 'add_ingredient' %}">
+        {% csrf_token %}
+        
+        <button type="submit" name="process_button">Add New Ingredient</button>
+    </form>
+
+{%endblock content%}
